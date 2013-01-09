@@ -32,6 +32,23 @@ mailalias {
 }
 ```
 
+Define cron jobs
+```Puppet
+cron {
+  'Rancid run':
+      command => '/usr/bin/rancid-run',
+      user    => 'rancid',
+      minute  => '15',
+      hour    => [6, 12, 15, 18, 23],
+
+  'Rancid cleanup':
+      command => '/usr/bin/find /var/log/rancid -type f -mtime +2 -exec rm {} \;',
+      user    => 'rancid',
+      minute  => '50',
+      hour    => '23';
+}
+```
+
 # Author
 
 * Tobias Brunner <tobias@tobru.ch>
